@@ -3,7 +3,7 @@ import LeadForm from "./components/LeadForm/LeadForm";
 function App() {
   return (
     <main className="flex min-h-screen flex-col bg-zinc-950 text-white">
-      <header className="w-full bg-zinc-900/70 border-b border-white/10 px-8 py-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
+      <header className="w-full bg-zinc-900/60 border-b border-white/5 px-8 py-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
         <div className="flex w-full pl-7 items-center justify-start gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/80 sm:text-sm">
           <img src="/LogoHeader.png" alt="CNPJ 360" className="h-12 w-auto" />
         </div>
