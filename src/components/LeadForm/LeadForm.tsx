@@ -1,14 +1,24 @@
+import type { FormEvent } from "react";
 import { ArrowRight, Building2, IdCard, Mail, Phone } from "lucide-react";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
-function LeadForm() {
+type LeadFormProps = {
+  onSubmit?: () => void;
+};
+
+function LeadForm({ onSubmit }: LeadFormProps) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit?.();
+  };
+
   return (
     <section className="h-full w-full">
       <div className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-none bg-[radial-gradient(circle_at_top,rgba(255,220,170,0.08),transparent_55%),linear-gradient(180deg,rgba(24,24,30,0.98),rgba(12,12,16,0.98))] p-6 sm:p-8 lg:p-10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
-        <div className="pointer-events-none absolute right-[-12%] top-[-10%] size-[12rem] sm:size-[14rem] lg:size-[18rem] rounded-full" />
-        <div className="pointer-events-none absolute left-[-8%] bottom-[-14%] size-[11rem] sm:size-[13rem] lg:size-[16rem] rounded-full" />
+        <div className="pointer-events-none absolute right-[-12%] top-[-10%] size-48 sm:size-56 lg:size-72 rounded-full" />
+        <div className="pointer-events-none absolute left-[-8%] bottom-[-14%] size-44 sm:size-52 lg:size-64 rounded-full" />
 
         <div className="mb-6 flex flex-col gap-3 sm:mb-7 sm:gap-4 lg:mb-9">
           <h2 className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
@@ -19,7 +29,10 @@ function LeadForm() {
           </p>
         </div>
 
-        <form className="grid flex-1 content-start gap-6 md:grid-cols-2 md:gap-x-10 md:gap-y-6">
+        <form
+          className="grid flex-1 content-start gap-6 md:grid-cols-2 md:gap-x-10 md:gap-y-6"
+          onSubmit={handleSubmit}
+        >
           <span className="group flex flex-col gap-2">
             <span className="text-[0.65rem] font-semibold   tracking-[0.2em] text-white/60 sm:text-xs">
               Nome
@@ -78,11 +91,17 @@ function LeadForm() {
           </span>
 
           <div className="flex gap-4 pt-3 md:flex-row md:items-center md:justify-between" />
+
+          <div className="md:col-span-2">
+            <Button
+              type="submit"
+              className="relative mt-auto inline-flex h-12 w-full items-center justify-center gap-4 overflow-hidden rounded-2xl bg-[#bb7944]/80 px-8 py-4 text-sm font-semibold text-white/80 shadow-[0_16px_40px_rgba(198,170,100,0.1)] transition-all duration-300 ease-out hover:cursor-pointer hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_18px_50px_rgba(198,170,100,0.17)] focus-visible:ring-2 focus-visible:ring-amber-200/40 sm:h-14 sm:text-base"
+            >
+              Consultar empresa
+              <ArrowRight className="size-4 sm:size-5" aria-hidden="true" />
+            </Button>
+          </div>
         </form>
-        <Button className="relative mt-auto inline-flex h-12 w-full items-center justify-center gap-4 overflow-hidden rounded-2xl bg-[#bb7944]/80 px-8 py-4 text-sm font-semibold text-white/80 shadow-[0_16px_40px_rgba(198,170,100,0.1)] transition-all duration-300 ease-out hover:cursor-pointer hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_18px_50px_rgba(198,170,100,0.17)] focus-visible:ring-2 focus-visible:ring-amber-200/40 sm:h-14 sm:text-base">
-          Consultar empresa
-          <ArrowRight className="size-4 sm:size-5" aria-hidden="true" />
-        </Button>
       </div>
     </section>
   );

@@ -1,0 +1,116 @@
+{
+  "company": {
+    "corporateName": "LETALK PLATAFORMA LTDA",
+    "tradeName": "LETALK",
+    "formattedCnpj": "47.095.639/0001-61",
+    "legalNature": "Sociedade Empresária Limitada",
+    "companySize": "EMPRESA DE PEQUENO PORTE",
+    "branchType": "Headquarters",
+    "openingDate": "11/07/2022",
+    "yearsInBusiness": 3
+  },
+  "status": {
+    "registrationStatus": "ACTIVE",
+    "statusColor": "green",
+    "statusDate": "11/07/2022",
+    "statusReason": "SEM MOTIVO"
+  },
+  "location": {
+    "formattedAddress": "AVENIDA PORTUGAL, 2085, LOJA 11, SANTA AMELIA - BELO HORIZONTE/MG, ZIP Code: 31555-000",
+    "city": "BELO HORIZONTE",
+    "state": "MG",
+    "formattedZipCode": "31555-000"
+  },
+  "contacts": {
+    "formattedPhone": "(31) 9954-4441",
+    "email": "",
+    "hasContactInfo": true
+  },
+  "mainActivity": {
+    "formattedCode": "6203-1/00",
+    "description": "Desenvolvimento e licenciamento de programas de computador não-customizáveis"
+  },
+  "secondaryActivities": [
+    {
+      "code": "4110-7/00",
+      "description": "Incorporação de empreendimentos imobiliários"
+    },
+    {
+      "code": "6202-3/00",
+      "description": "Desenvolvimento e licenciamento de programas de computador customizáveis"
+    },
+    {
+      "code": "6209-1/00",
+      "description": "Suporte técnico, manutenção e outros serviços em tecnologia da informação"
+    },
+    {
+      "code": "6311-9/00",
+      "description": "Tratamento de dados, provedores de serviços de aplicação e serviços de hospedagem na internet"
+    },
+    {
+      "code": "6319-4/00",
+      "description": "Portais, provedores de conteúdo e outros serviços de informação na internet"
+    },
+    {
+      "code": "7311-4/00",
+      "description": "Agências de publicidade"
+    },
+    {
+      "code": "7319-0/02",
+      "description": "Promoção de vendas"
+    },
+    {
+      "code": "8211-3/00",
+      "description": "Serviços combinados de escritório e apoio administrativo"
+    },
+    {
+      "code": "8599-6/04",
+      "description": "Treinamento em desenvolvimento profissional e gerencial"
+    }
+  ],
+  "partners": [
+    {
+      "name": "GUILHERME VILELA CARVALHO",
+      "role": "Sócio-Administrador",
+      "ageRange": "Entre 31 a 40 anos",
+      "entryDate": "11/07/2022"
+    },
+    {
+      "name": "GVC HOLDING LTDA",
+      "role": "Sócio",
+      "ageRange": "Não se aplica",
+      "entryDate": "27/08/2024"
+    },
+    {
+      "name": "RAFAEL GUIMARAES LIMA",
+      "role": "Sócio-Administrador",
+      "ageRange": "Entre 31 a 40 anos",
+      "entryDate": "11/07/2022"
+    }
+  ],
+  "taxRegime": [
+    {
+      "year": 2023,
+      "taxRegime": "LUCRO REAL"
+    },
+    {
+      "year": 2024,
+      "taxRegime": "LUCRO REAL"
+    }
+  ],
+  "metrics": {
+    "yearsInBusiness": 3,
+    "partnersCount": 3,
+    "secondaryActivitiesCount": 9,
+    "shareCapital": "R$ 400.000,00",
+    "isActive": true
+  },
+  "insights": [
+    "Operates in technology-related activities",
+    "Has multiple business activities",
+    "Headquarters company"
+  ],
+  "secondaryActivitiesCount": 9,
+  "partnersCount": 3,
+  "currentTaxRegime": "LUCRO REAL"
+}
