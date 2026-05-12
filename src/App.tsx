@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import LeadForm from "./components/LeadForm/LeadForm";
-import leadResponseMock from "./types/LeadRespondeMock.json";
+import type { LeadDashboardResponse } from "./types/lead.types";
 import { CompanyCard } from "./components/Dashboard/CompanyCard";
 import { StatusCard } from "./components/Dashboard/StatusCard";
 import { LocationCard } from "./components/Dashboard/LocationCard";
@@ -13,12 +13,14 @@ import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const [showCompany, setShowCompany] = useState(false);
+  const [leadData, setLeadData] = useState<LeadDashboardResponse | null>(null);
 
-  const companyData = leadResponseMock;
+  const shouldShowCompany = showCompany && leadData !== null;
+  const companyData = leadData ?? undefined;
 
   return (
     <main className="flex min-h-screen flex-col bg-zinc-950 text-white">
-      {showCompany ? (
+      {shouldShowCompany && companyData ? (
         <>
           <header className="w-full border-b border-white/5 bg-zinc-900/60 px-8 py-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
             <div className="flex w-full items-center justify-between gap-4">
@@ -77,7 +79,12 @@ function App() {
       ) : (
         <div className="flex flex-1 items-center justify-center px-6 py-8 sm:px-10 lg:px-14">
           <div className="w-full max-w-[1800px]">
-            <LeadForm onSubmit={() => setShowCompany(true)} />
+            <LeadForm
+              onSubmit={(data) => {
+                setLeadData(data);
+                setShowCompany(true);
+              }}
+            />
           </div>
         </div>
       )}

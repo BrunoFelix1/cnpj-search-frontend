@@ -9,17 +9,19 @@ export type LeadDashboardResponse = {
   company: {
     corporateName: string;
     tradeName: string;
-    cnpj: string;
+    formattedCnpj: string;
     legalNature: string;
     companySize: string;
+    branchType: string;
     openingDate: string;
+    yearsInBusiness: number;
   };
 
   status: {
     registrationStatus: string;
-    registrationStatusDate: string;
-    specialStatus?: string;
-    specialStatusDate?: string;
+    statusColor: string;
+    statusDate: string;
+    statusReason: string;
   };
 
   location: {

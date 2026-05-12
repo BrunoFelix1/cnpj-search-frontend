@@ -1,17 +1,46 @@
-import type { FormEvent } from "react";
+import type { FormEvent, ChangeEvent } from "react";
+import { useState } from "react";
 import { ArrowRight, Building2, IdCard, Mail, Phone } from "lucide-react";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { searchLead } from "../../services/lead.service";
+import type {
+  LeadDashboardResponse,
+  SearchLeadDto,
+} from "../../types/lead.types";
 
 type LeadFormProps = {
-  onSubmit?: () => void;
+  onSubmit?: (data: LeadDashboardResponse) => void;
 };
 
 function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [formData, setFormData] = useState<SearchLeadDto>({
+    name: "",
+    email: "",
+    phone: "",
+    cnpj: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit?.();
+    if (isSubmitting) {
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      const response = await searchLead(formData);
+      onSubmit?.(response);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -83,7 +112,10 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
               <div className="relative">
                 <Input
                   type="text"
+                  name="name"
                   placeholder="Ex: João da Silva"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
@@ -99,7 +131,10 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
               <div className="relative">
                 <Input
                   type="email"
+                  name="email"
                   placeholder="seu@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
@@ -115,7 +150,10 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
               <div className="relative">
                 <Input
                   type="tel"
+                  name="phone"
                   placeholder="(11) 99999-9999"
+                  value={formData.phone}
+                  onChange={handleChange}
                   className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
@@ -132,7 +170,10 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
                 <Input
                   type="text"
                   inputMode="numeric"
+                  name="cnpj"
                   placeholder="00.000.000/0000-00"
+                  value={formData.cnpj}
+                  onChange={handleChange}
                   className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
@@ -143,7 +184,8 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             <div className="pt-3">
               <Button
                 type="submit"
-                className="flex h-14 hover:cursor-pointer w-full items-center justify-center gap-3 rounded-2xl bg-[#bb7944]/90 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(187,121,68,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
+                disabled={isSubmitting}
+                className="flex h-14 hover:cursor-pointer w-full items-center justify-center gap-3 rounded-2xl bg-[#bb7944]/90 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(187,121,68,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 Consultar empresa
                 <ArrowRight className="size-4" />
