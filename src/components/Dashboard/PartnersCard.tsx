@@ -86,12 +86,12 @@ export function PartnersCard({
                         </div>
                       </div>
 
-                      <div className="flex flex-col items-start gap-1 lg:items-end">
+                      <div className="flex flex-col items-start gap-2">
                         <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
                           Entrada na sociedade
                         </span>
 
-                        <span className="text-sm font-semibold text-white">
+                        <span className="text-sm font-semibold leading-none text-white">
                           {partner.entryDate}
                         </span>
                       </div>

@@ -58,7 +58,7 @@ function App() {
                 />
               </div>
 
-              <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
+              <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8 mt-2">
                 {sections.map((section) => {
                   const isActive = activeSection === section.key;
 
@@ -125,11 +125,7 @@ function App() {
               )}
 
               {activeSection === "details" && (
-                <section className="flex flex-col gap-8">
-                  <PartnersCard
-                    partners={companyData.partners}
-                    nameOfSearcher={searcherName}
-                  />
+                <section className="grid grid-cols-[1.5fr_1fr] gap-8">
                   <GeneralInfoCard
                     metrics={companyData.metrics}
                     secondaryActivitiesCount={
@@ -137,6 +133,10 @@ function App() {
                     }
                     partnersCount={companyData.partners.length}
                     currentTaxRegime={companyData.currentTaxRegime}
+                  />
+                  <PartnersCard
+                    partners={companyData.partners}
+                    nameOfSearcher={searcherName}
                   />
                 </section>
               )}

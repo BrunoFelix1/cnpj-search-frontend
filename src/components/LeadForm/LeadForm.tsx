@@ -75,6 +75,8 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
         cnpj: stripNonDigits(formData.cnpj),
       });
       onSubmit?.(response, formData.name.trim());
+    } catch {
+      setFormError("Erro na API");
     } finally {
       setIsSubmitting(false);
     }
@@ -82,7 +84,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
   return (
     <section className="h-full w-full">
-      <div className="grid min-h-170 overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid min-h-[90vh] overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:grid-cols-[1.05fr_0.95fr]">
         <div className="relative hidden overflow-hidden lg:flex">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(252,215,165,0.18),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(180,140,255,0.18),transparent_35%),linear-gradient(160deg,rgba(22,20,28,0.98),rgba(12,12,16,0.98))]" />
 
@@ -139,13 +141,14 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
           <form
             onSubmit={handleSubmit}
-            className="mx-auto mt-10 flex w-full max-w-lg flex-col gap-6"
+            className="mx-auto mt-8 grid w-full max-w-3xl grid-cols-1 gap-x-8 gap-y-6 max-[1600px]:grid-cols-2"
           >
             {formError ? (
-              <div className="rounded-xl =  px-0 py-0 text-xs font-semibold text-amber-100">
+              <div className="text-xs font-semibold text-amber-100 max-[1600px]:col-span-2">
                 {formError}
               </div>
             ) : null}
+
             <div className="group">
               <span className="mb-2 block text-xs font-medium text-white">
                 Nome
@@ -163,6 +166,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Building2 className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+
               {fieldErrors.name ? (
                 <span className="mt-2 block text-xs text-amber-100/80">
                   {fieldErrors.name}
@@ -171,7 +175,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             </div>
 
             <div className="group">
-              <span className="mb-2 block text-xs font-medium text-white ">
+              <span className="mb-2 block text-xs font-medium text-white">
                 E-mail
               </span>
 
@@ -187,6 +191,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Mail className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+
               {fieldErrors.email ? (
                 <span className="mt-2 block text-xs text-amber-100/80">
                   {fieldErrors.email}
@@ -211,6 +216,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Phone className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+
               {fieldErrors.phone ? (
                 <span className="mt-2 block text-xs text-amber-100/80">
                   {fieldErrors.phone}
@@ -236,6 +242,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <IdCard className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+
               {fieldErrors.cnpj ? (
                 <span className="mt-2 block text-xs text-amber-100/80">
                   {fieldErrors.cnpj}
@@ -243,11 +250,11 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
               ) : null}
             </div>
 
-            <div className="pt-3">
+            <div className="pt-2 max-[1600px]:col-span-2">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex h-14 hover:cursor-pointer w-full items-center justify-center gap-3 rounded-2xl bg-[#bb7944]/90 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(187,121,68,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl bg-[#bb7944]/90 text-sm font-semibold text-white shadow-[0_18px_45px_rgba(187,121,68,0.22)] transition-all duration-300 hover:cursor-pointer hover:-translate-y-0.5 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 Consultar empresa
                 <ArrowRight className="size-4" />
