@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import LeadForm from "./components/LeadForm/LeadForm";
-import leadResponseMock from "./mocks/LeadRespondeMock.json";
+import leadResponseMock from "./types/LeadRespondeMock.json";
 import { CompanyCard } from "./components/Dashboard/CompanyCard";
 import { StatusCard } from "./components/Dashboard/StatusCard";
 import { LocationCard } from "./components/Dashboard/LocationCard";
