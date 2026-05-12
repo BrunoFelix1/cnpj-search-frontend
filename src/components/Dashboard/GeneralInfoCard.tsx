@@ -52,7 +52,7 @@ export function GeneralInfoCard({
   ];
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="w-full overflow-hidden border border-white/10 rounded-2xl bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
@@ -84,10 +84,10 @@ export function GeneralInfoCard({
           {metricCards.map((metric) => (
             <div
               key={metric.label}
-              className={`rounded-2xl border p-5 transition-all duration-300 ${
+              className={`rounded-2xl  p-5 transition-all duration-300 ${
                 metric.highlight
-                  ? "border-cyan-400/15 bg-cyan-400/5"
-                  : "border-white/5 bg-zinc-950 hover:border-white/10 hover:bg-zinc-900"
+                  ? " bg-cyan-400/5 border border-white/10"
+                  : "border border-white/10 bg-zinc-950 hover:border-white/10 hover:bg-zinc-900"
               }`}
             >
               <div className="flex flex-col gap-3">

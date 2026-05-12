@@ -105,29 +105,27 @@ function App() {
           <div className="w-full flex-1 bg-zinc-950 px-6 py-10 sm:px-10 sm:py-12">
             <div className="mx-auto grid max-w-[1800px] gap-8">
               {activeSection === "overview" && (
-                <section className="rounded-[2rem] border border-white/5 bg-gradient-to-br from-zinc-900/70 via-zinc-900/50 to-zinc-950/80 p-6 shadow-[0_24px_55px_rgba(0,0,0,0.45)] sm:p-8">
-                  <div className="grid gap-8">
-                    <div className="grid gap-8 lg:grid-cols-[3fr_1fr]">
-                      <CompanyCard company={companyData.company} />
+                <div className="grid gap-8">
+                  <div className="grid gap-8 lg:grid-cols-[3fr_1fr]">
+                    <CompanyCard company={companyData.company} />
 
-                      <StatusCard status={companyData.status} />
-                    </div>
-
-                    <LocationCard
-                      location={companyData.location}
-                      contacts={companyData.contacts}
-                    />
-
-                    <ActivitiesCard
-                      mainActivity={companyData.mainActivity}
-                      secondaryActivities={companyData.secondaryActivities}
-                    />
+                    <StatusCard status={companyData.status} />
                   </div>
-                </section>
+
+                  <LocationCard
+                    location={companyData.location}
+                    contacts={companyData.contacts}
+                  />
+
+                  <ActivitiesCard
+                    mainActivity={companyData.mainActivity}
+                    secondaryActivities={companyData.secondaryActivities}
+                  />
+                </div>
               )}
 
               {activeSection === "details" && (
-                <section className="rounded-[2rem] border border-white/5 bg-gradient-to-br from-zinc-900/70 via-zinc-900/50 to-zinc-950/80 p-6 shadow-[0_24px_55px_rgba(0,0,0,0.45)] sm:p-8 flex flex-col gap-8">
+                <section className="flex flex-col gap-8">
                   <PartnersCard
                     partners={companyData.partners}
                     nameOfSearcher={searcherName}

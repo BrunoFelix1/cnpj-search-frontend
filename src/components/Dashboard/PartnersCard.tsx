@@ -14,7 +14,7 @@ export function PartnersCard({
   nameOfSearcher,
 }: Readonly<PartnersCardProps>) {
   return (
-    <div className="w-full overflow-hidden rounded-2xl bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
@@ -36,8 +36,8 @@ export function PartnersCard({
           </div>
         </div>
 
-        <div className="max-h-105 overflow-y-auto pr-1">
-          <div className="grid gap-4">
+        <div className="max-h-72 overflow-y-auto pr-1">
+          <div className="grid gap-4 ">
             {partners.length > 0 ? (
               partners.map((partner, index) => {
                 const isHighlighted =
@@ -47,13 +47,13 @@ export function PartnersCard({
                 return (
                   <div
                     key={`${partner.name}-${index}`}
-                    className={`group rounded-2xl p-5 transition-all duration-300 ${
+                    className={`group rounded-2xl p-5  transition-all duration-300  ${
                       isHighlighted
-                        ? "border border-cyan-400/20 bg-cyan-400/5 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]"
-                        : "border border-white/5 bg-zinc-950 hover:border-white/10 hover:bg-zinc-900"
+                        ? "border  border-white/10 bg-cyan-400/5 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]"
+                        : "border border-white/10 bg-zinc-950 hover:border-white/10 hover:bg-zinc-900"
                     }`}
                   >
-                    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between ">
                       <div className="flex items-start gap-4">
                         <div className="flex flex-col gap-2">
                           <div className="flex flex-wrap items-center gap-2">
