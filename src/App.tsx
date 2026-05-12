@@ -5,6 +5,8 @@ import leadResponseMock from "./mocks/LeadRespondeMock.json";
 import { CompanyCard } from "./components/Dashboard/CompanyCard";
 import { StatusCard } from "./components/Dashboard/StatusCard";
 import { LocationCard } from "./components/Dashboard/LocationCard";
+import { ActivitiesCard } from "./components/Dashboard/ActivitiesCard";
+import { PartnersCard } from "./components/Dashboard/PartnersCard";
 
 function App() {
   const [showCompany, setShowCompany] = useState(false);
@@ -28,6 +30,14 @@ function App() {
               location={companyData.location}
               contacts={companyData.contacts}
             />
+            <ActivitiesCard
+              mainActivity={companyData.mainActivity}
+              secondaryActivities={companyData.secondaryActivities}
+            />
+            <PartnersCard
+              partners={companyData.partners}
+              nameOfSearcher="rafael guimaraes lima"
+            />
           </div>
         </div>
       ) : (
@@ -37,7 +47,7 @@ function App() {
 
             <div className="flex flex-wrap gap-4 text-xs text-white/70">
               <div className="flex w-full items-center justify-center">
-                <span className="w-full text-center tracking-[0.35em] text-amber-100/70">
+                <span className="w-full text-center tracking-[0.35em] text-amber-100/70 -mt-4">
                   Desenvolvido por @BrunoFelix. Todos os direitos reservados.
                 </span>
               </div>
