@@ -40,7 +40,6 @@ export function ActivitiesCard({
 
             <div className="mt-4 flex flex-col gap-3">
               <span className="w-fit rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-100">
-                {" "}
                 {mainActivity.formattedCode}
               </span>
 
@@ -60,7 +59,7 @@ export function ActivitiesCard({
                 secondaryActivities.map((activity) => (
                   <div
                     key={activity.code}
-                    className="rounded-xl border border-white/5 bg-white/2 p-4 transition-colors hover:border-white/10 hover:bg-white/[0.04]"
+                    className="rounded-xl border border-white/5 bg-white/2 p-4 transition-colors hover:border-white/10 hover:bg-white/4"
                   >
                     <div className="flex flex-col gap-2">
                       <span className="w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-zinc-300">

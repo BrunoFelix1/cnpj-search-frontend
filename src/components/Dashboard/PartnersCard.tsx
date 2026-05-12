@@ -36,14 +36,13 @@ export function PartnersCard({
           </div>
         </div>
 
-        <div className="max-h-[420px] overflow-y-auto pr-1">
+        <div className="max-h-105 overflow-y-auto pr-1">
           <div className="grid gap-4">
             {partners.length > 0 ? (
               partners.map((partner, index) => {
                 const isHighlighted =
-                  nameOfSearcher &&
                   partner.name.trim().toLowerCase() ===
-                    nameOfSearcher.trim().toLowerCase();
+                  nameOfSearcher?.trim().toLowerCase();
 
                 return (
                   <div
