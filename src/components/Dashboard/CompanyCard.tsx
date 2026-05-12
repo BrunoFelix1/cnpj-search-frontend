@@ -13,7 +13,7 @@ type CompanyCardProps = {
 
 export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
   return (
-    <div className="w-full rounded-2xl border border-white/10 bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="w-full rounded-2xl border border-none bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-1">
@@ -32,7 +32,7 @@ export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-xl border border-none bg-zinc-950 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
-              Natureza juridica
+              Natureza jurÍdica
             </p>
             <p className="mt-2 text-sm font-semibold text-white">
               {company.legalNature}

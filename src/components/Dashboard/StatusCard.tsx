@@ -27,7 +27,7 @@ export function StatusCard({ status }: Readonly<StatusCardProps>) {
     STATUS_LABELS[ERegistrationStatus.UNKNOWN];
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="rounded-2xl border border-none bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/50">

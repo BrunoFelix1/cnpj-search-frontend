@@ -19,7 +19,9 @@
     "formattedAddress": "AVENIDA PORTUGAL, 2085, LOJA 11, SANTA AMELIA - BELO HORIZONTE/MG, ZIP Code: 31555-000",
     "city": "BELO HORIZONTE",
     "state": "MG",
-    "formattedZipCode": "31555-000"
+    "formattedZipCode": "31555-000",
+    "latitude": -19.8426609,
+    "longitude": -43.9896947
   },
   "contacts": {
     "formattedPhone": "(31) 9954-4441",

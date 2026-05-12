@@ -4,6 +4,7 @@ import LeadForm from "./components/LeadForm/LeadForm";
 import leadResponseMock from "./mocks/LeadRespondeMock.json";
 import { CompanyCard } from "./components/Dashboard/CompanyCard";
 import { StatusCard } from "./components/Dashboard/StatusCard";
+import { LocationCard } from "./components/Dashboard/LocationCard";
 
 function App() {
   const [showCompany, setShowCompany] = useState(false);
@@ -17,10 +18,16 @@ function App() {
         </div>
       </header>
       {showCompany ? (
-        <div className="w-full flex-1 px-6 py-10 sm:px-10 sm:py-12 bg-zinc-950">
-          <div className="gap-8 grid grid-cols-[3fr_1fr]">
-            <CompanyCard company={companyData.company} />
-            <StatusCard status={companyData.status} />
+        <div className="w-full flex-1 bg-zinc-950 px-6 py-10 sm:px-10 sm:py-12">
+          <div className="grid gap-8">
+            <div className="grid gap-8 lg:grid-cols-[3fr_1fr]">
+              <CompanyCard company={companyData.company} />
+              <StatusCard status={companyData.status} />
+            </div>
+            <LocationCard
+              location={companyData.location}
+              contacts={companyData.contacts}
+            />
           </div>
         </div>
       ) : (

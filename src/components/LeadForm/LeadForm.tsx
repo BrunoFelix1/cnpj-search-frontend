@@ -8,7 +8,7 @@ type LeadFormProps = {
   onSubmit?: () => void;
 };
 
-function LeadForm({ onSubmit }: LeadFormProps) {
+function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit?.();
