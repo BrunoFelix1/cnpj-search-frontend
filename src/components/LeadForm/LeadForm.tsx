@@ -17,7 +17,7 @@ import {
 import { schema } from "./lead.schema";
 
 type LeadFormProps = {
-  onSubmit?: (data: LeadDashboardResponse) => void;
+  onSubmit?: (data: LeadDashboardResponse, searcherName: string) => void;
 };
 
 function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
@@ -74,7 +74,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
         phone: stripNonDigits(formData.phone),
         cnpj: stripNonDigits(formData.cnpj),
       });
-      onSubmit?.(response);
+      onSubmit?.(response, formData.name.trim());
     } finally {
       setIsSubmitting(false);
     }
@@ -147,7 +147,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
               </div>
             ) : null}
             <div className="group">
-              <span className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white">
                 Nome
               </span>
 
@@ -158,7 +158,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
                   placeholder="Ex: João da Silva"
                   value={formData.name}
                   onChange={handleChange}
-                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
+                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/35 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
                 <Building2 className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
@@ -171,7 +171,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             </div>
 
             <div className="group">
-              <span className="mb-2 block text-xs font-medium text-white/70 ">
+              <span className="mb-2 block text-xs font-medium text-white ">
                 E-mail
               </span>
 
@@ -182,7 +182,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
                   placeholder="seu@email.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
+                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/35 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
                 <Mail className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
@@ -195,7 +195,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             </div>
 
             <div className="group">
-              <span className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white">
                 Telefone
               </span>
 
@@ -206,7 +206,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
                   placeholder="(11) 99999-9999"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
+                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/35 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
                 <Phone className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
@@ -219,7 +219,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             </div>
 
             <div className="group">
-              <span className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white">
                 CNPJ
               </span>
 
@@ -231,7 +231,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
                   placeholder="00.000.000/0000-00"
                   value={formData.cnpj}
                   onChange={handleChange}
-                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/25 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
+                  className="h-14 rounded-none border-0 border-b border-white/10 bg-transparent px-0 pr-12 text-sm text-white placeholder:text-white/35 shadow-none transition focus-visible:border-amber-100/35 focus-visible:ring-0"
                 />
 
                 <IdCard className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />

@@ -38,7 +38,7 @@ export function LocationCard({
   const position: [number, number] = [location.latitude, location.longitude];
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-none bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
@@ -55,12 +55,12 @@ export function LocationCard({
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
+          <div className="relative z-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
             <MapContainer
               center={position}
               zoom={15}
               scrollWheelZoom
-              className="h-72 w-full"
+              className="h-72 w-full z-0"
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -86,7 +86,7 @@ export function LocationCard({
           </div>
 
           <div className="flex flex-col gap-4">
-            <div className="rounded-xl border border-none bg-zinc-950 p-4">
+            <div className="rounded-xl border border-white/10 bg-zinc-950 p-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
                 Endereço completo
               </p>
@@ -94,7 +94,7 @@ export function LocationCard({
                 {location.formattedAddress}
               </p>
             </div>
-            <div className="rounded-xl border border-none bg-zinc-950 p-4">
+            <div className="rounded-xl border border-white/10 bg-zinc-950 p-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
                 Coordenadas
               </p>
@@ -102,7 +102,7 @@ export function LocationCard({
                 {location.latitude}, {location.longitude}
               </p>
             </div>
-            <div className="rounded-xl border border-none bg-zinc-950 p-4">
+            <div className="rounded-xl border border-white/10 bg-zinc-950 p-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
                 Contatos
               </p>

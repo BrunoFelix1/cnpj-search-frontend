@@ -1,30 +1,56 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import LeadForm from "./components/LeadForm/LeadForm";
 import type { LeadDashboardResponse } from "./types/lead.types";
+
 import { CompanyCard } from "./components/Dashboard/CompanyCard";
 import { StatusCard } from "./components/Dashboard/StatusCard";
 import { LocationCard } from "./components/Dashboard/LocationCard";
 import { ActivitiesCard } from "./components/Dashboard/ActivitiesCard";
 import { PartnersCard } from "./components/Dashboard/PartnersCard";
 import { GeneralInfoCard } from "./components/Dashboard/GeneralInfoCard";
+
 import { Button } from "./components/ui/button";
 import { Footer } from "./components/Footer/Footer";
 
+type DashboardSection = "overview" | "details";
+
 function App() {
   const [showCompany, setShowCompany] = useState(false);
+
   const [leadData, setLeadData] = useState<LeadDashboardResponse | null>(null);
+  const [searcherName, setSearcherName] = useState("");
+
+  const [activeSection, setActiveSection] =
+    useState<DashboardSection>("overview");
 
   const shouldShowCompany = showCompany && leadData !== null;
-  const companyData = leadData ?? undefined;
+
+  const companyData = useMemo(() => {
+    return leadData ?? undefined;
+  }, [leadData]);
+
+  const sections: Array<{
+    key: DashboardSection;
+    label: string;
+  }> = [
+    {
+      key: "overview",
+      label: "Visão geral",
+    },
+    {
+      key: "details",
+      label: "Detalhes",
+    },
+  ];
 
   return (
     <main className="flex min-h-screen flex-col bg-zinc-950 text-white">
       {shouldShowCompany && companyData ? (
         <>
-          <header className="w-full border-b border-white/5 bg-zinc-900/60 px-8 py-5 shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
-            <div className="flex w-full items-center justify-between gap-4">
-              <div className="flex items-center justify-start gap-3 pl-7 text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/80 sm:text-sm">
+          <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-zinc-900/80 px-8 py-5 backdrop-blur-xl shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
+            <div className="relative flex items-center justify-between">
+              <div className="flex items-center gap-3 pl-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/80 sm:text-sm">
                 <img
                   src="/LogoHeader.png"
                   alt="CNPJ 360"
@@ -32,9 +58,44 @@ function App() {
                 />
               </div>
 
+              <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8">
+                {sections.map((section) => {
+                  const isActive = activeSection === section.key;
+
+                  return (
+                    <button
+                      key={section.key}
+                      onClick={() => setActiveSection(section.key)}
+                      className={`group hover:cursor-pointer relative flex items-center justify-center px-1 pb-3 text-sm font-normal transition-all duration-300 ${
+                        isActive
+                          ? "text-white"
+                          : "text-white/45 hover:text-white/80"
+                      }`}
+                    >
+                      <span className="relative z-10 tracking-[0.01em]">
+                        {section.label}
+                      </span>
+
+                      <span
+                        className={`absolute bottom-0 left-0 h-[2px] rounded-full bg-[#bb7944] transition-all duration-300 ${
+                          isActive
+                            ? "w-full opacity-100"
+                            : "w-0 opacity-0 group-hover:w-full group-hover:opacity-70"
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
               <Button
-                onClick={() => setShowCompany(false)}
-                className="rounded-2xl bg-[#bb7944]/80 px-6 py-4 text-sm font-semibold text-white/80 transition-all duration-300 ease-out hover:cursor-pointer hover:-translate-y-0.5 hover:brightness-110 focus-visible:ring-2 focus-visible:ring-amber-200/40 sm:h-11 sm:text-base"
+                onClick={() => {
+                  setShowCompany(false);
+                  setLeadData(null);
+                  setSearcherName("");
+                  setActiveSection("overview");
+                }}
+                className="rounded-full border border-white/10 bg-[#bb7944]/70 px-6 py-4 text-sm font-semibold text-white/80 transition-all duration-300 ease-out hover:cursor-pointer hover:-translate-y-0.5 hover:border-white/20 sm:h-11 sm:text-base"
               >
                 Nova consulta
               </Button>
@@ -42,35 +103,45 @@ function App() {
           </header>
 
           <div className="w-full flex-1 bg-zinc-950 px-6 py-10 sm:px-10 sm:py-12">
-            <div className="grid gap-8">
-              <div className="grid gap-8 lg:grid-cols-[3fr_1fr]">
-                <CompanyCard company={companyData.company} />
-                <StatusCard status={companyData.status} />
-              </div>
+            <div className="mx-auto grid max-w-[1800px] gap-8">
+              {activeSection === "overview" && (
+                <section className="rounded-[2rem] border border-white/5 bg-gradient-to-br from-zinc-900/70 via-zinc-900/50 to-zinc-950/80 p-6 shadow-[0_24px_55px_rgba(0,0,0,0.45)] sm:p-8">
+                  <div className="grid gap-8">
+                    <div className="grid gap-8 lg:grid-cols-[3fr_1fr]">
+                      <CompanyCard company={companyData.company} />
 
-              <LocationCard
-                location={companyData.location}
-                contacts={companyData.contacts}
-              />
+                      <StatusCard status={companyData.status} />
+                    </div>
 
-              <ActivitiesCard
-                mainActivity={companyData.mainActivity}
-                secondaryActivities={companyData.secondaryActivities}
-              />
+                    <LocationCard
+                      location={companyData.location}
+                      contacts={companyData.contacts}
+                    />
 
-              <PartnersCard
-                partners={companyData.partners}
-                nameOfSearcher="rafael guimaraes lima"
-              />
+                    <ActivitiesCard
+                      mainActivity={companyData.mainActivity}
+                      secondaryActivities={companyData.secondaryActivities}
+                    />
+                  </div>
+                </section>
+              )}
 
-              <GeneralInfoCard
-                metrics={companyData.metrics}
-                secondaryActivitiesCount={
-                  companyData.secondaryActivities.length
-                }
-                partnersCount={companyData.partners.length}
-                currentTaxRegime={companyData.currentTaxRegime}
-              />
+              {activeSection === "details" && (
+                <section className="rounded-[2rem] border border-white/5 bg-gradient-to-br from-zinc-900/70 via-zinc-900/50 to-zinc-950/80 p-6 shadow-[0_24px_55px_rgba(0,0,0,0.45)] sm:p-8 flex flex-col gap-8">
+                  <PartnersCard
+                    partners={companyData.partners}
+                    nameOfSearcher={searcherName}
+                  />
+                  <GeneralInfoCard
+                    metrics={companyData.metrics}
+                    secondaryActivitiesCount={
+                      companyData.secondaryActivities.length
+                    }
+                    partnersCount={companyData.partners.length}
+                    currentTaxRegime={companyData.currentTaxRegime}
+                  />
+                </section>
+              )}
             </div>
           </div>
 
@@ -80,8 +151,9 @@ function App() {
         <div className="flex flex-1 items-center justify-center px-6 py-8 sm:px-10 lg:px-14">
           <div className="w-full max-w-[1800px]">
             <LeadForm
-              onSubmit={(data) => {
+              onSubmit={(data, name) => {
                 setLeadData(data);
+                setSearcherName(name);
                 setShowCompany(true);
               }}
             />

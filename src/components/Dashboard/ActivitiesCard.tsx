@@ -14,7 +14,7 @@ export function ActivitiesCard({
   secondaryActivities,
 }: Readonly<ActivitiesCardProps>) {
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-none bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
+    <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-zinc-900 via-zinc-900/90 to-zinc-950 p-6 shadow-[0_20px_45px_rgba(0,0,0,0.45)]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
