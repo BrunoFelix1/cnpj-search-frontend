@@ -35,14 +35,26 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    const nextValue =
-      name === "phone"
-        ? formatPhone(value)
-        : name === "cnpj"
-          ? formatCnpj(value)
-          : value;
+    setFormData((prev) => {
+      if (name !== "phone" && name !== "cnpj") {
+        return { ...prev, [name]: value };
+      }
 
-    setFormData((prev) => ({ ...prev, [name]: nextValue }));
+      const prevValue = prev[name];
+      const prevDigits = stripNonDigits(prevValue);
+      const nextDigits = stripNonDigits(value);
+      const isDeletingSeparator =
+        nextDigits === prevDigits && value.length < prevValue.length;
+      const adjustedDigits = isDeletingSeparator
+        ? prevDigits.slice(0, -1)
+        : nextDigits;
+      const maskedValue =
+        name === "phone"
+          ? formatPhone(adjustedDigits)
+          : formatCnpj(adjustedDigits);
+
+      return { ...prev, [name]: maskedValue };
+    });
     setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
     setFormError(null);
   };
