@@ -30,7 +30,7 @@ export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-white/5 bg-zinc-900/70 p-4">
+          <div className="rounded-xl border border-none bg-zinc-950 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
               Natureza juridica
             </p>
@@ -38,7 +38,7 @@ export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
               {company.legalNature}
             </p>
           </div>
-          <div className="rounded-xl border border-white/5 bg-zinc-900/70 p-4">
+          <div className="rounded-xl border border-none bg-zinc-950 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
               Data de abertura
             </p>
@@ -46,7 +46,7 @@ export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
               {company.openingDate}
             </p>
           </div>
-          <div className="rounded-xl border border-white/5 bg-zinc-900/70 p-4">
+          <div className="rounded-xl border border-none bg-zinc-950 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
               Tempo de atividade
             </p>
@@ -54,7 +54,7 @@ export function CompanyCard({ company }: Readonly<CompanyCardProps>) {
               {company.yearsInBusiness} anos
             </p>
           </div>
-          <div className="rounded-xl border border-white/5 bg-zinc-900/70 p-4">
+          <div className="rounded-xl border border-none bg-zinc-950 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
               Tipo de unidade
             </p>
