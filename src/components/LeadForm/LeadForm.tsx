@@ -9,6 +9,12 @@ import type {
   LeadDashboardResponse,
   SearchLeadDto,
 } from "../../types/lead.types";
+import {
+  formatPhone,
+  formatCnpj,
+  stripNonDigits,
+} from "../../utils/text.utils";
+import { schema } from "./lead.schema";
 
 type LeadFormProps = {
   onSubmit?: (data: LeadDashboardResponse) => void;
@@ -22,10 +28,23 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
     cnpj: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<keyof SearchLeadDto, string>>
+  >({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const nextValue =
+      name === "phone"
+        ? formatPhone(value)
+        : name === "cnpj"
+          ? formatCnpj(value)
+          : value;
+
+    setFormData((prev) => ({ ...prev, [name]: nextValue }));
+    setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    setFormError(null);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -34,9 +53,27 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
       return;
     }
 
+    const validation = schema.safeParse(formData);
+    if (!validation.success) {
+      const nextErrors: Partial<Record<keyof SearchLeadDto, string>> = {};
+      for (const issue of validation.error.issues) {
+        const field = issue.path[0] as keyof SearchLeadDto | undefined;
+        if (field && !nextErrors[field]) {
+          nextErrors[field] = issue.message;
+        }
+      }
+      setFieldErrors(nextErrors);
+      setFormError("Preencha todos os campos corretamente.");
+      return;
+    }
+
     try {
       setIsSubmitting(true);
-      const response = await searchLead(formData);
+      const response = await searchLead({
+        ...formData,
+        phone: stripNonDigits(formData.phone),
+        cnpj: stripNonDigits(formData.cnpj),
+      });
       onSubmit?.(response);
     } finally {
       setIsSubmitting(false);
@@ -45,7 +82,7 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
   return (
     <section className="h-full w-full">
-      <div className="grid min-h-[680px] overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid min-h-170 overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:grid-cols-[1.05fr_0.95fr]">
         <div className="relative hidden overflow-hidden lg:flex">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(252,215,165,0.18),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(180,140,255,0.18),transparent_35%),linear-gradient(160deg,rgba(22,20,28,0.98),rgba(12,12,16,0.98))]" />
 
@@ -104,10 +141,15 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
             onSubmit={handleSubmit}
             className="mx-auto mt-10 flex w-full max-w-lg flex-col gap-6"
           >
+            {formError ? (
+              <div className="rounded-xl =  px-0 py-0 text-xs font-semibold text-amber-100">
+                {formError}
+              </div>
+            ) : null}
             <div className="group">
-              <label className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white/70">
                 Nome
-              </label>
+              </span>
 
               <div className="relative">
                 <Input
@@ -121,12 +163,17 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Building2 className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+              {fieldErrors.name ? (
+                <span className="mt-2 block text-xs text-amber-100/80">
+                  {fieldErrors.name}
+                </span>
+              ) : null}
             </div>
 
             <div className="group">
-              <label className="mb-2 block text-xs font-medium text-white/70 ">
+              <span className="mb-2 block text-xs font-medium text-white/70 ">
                 E-mail
-              </label>
+              </span>
 
               <div className="relative">
                 <Input
@@ -140,12 +187,17 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Mail className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+              {fieldErrors.email ? (
+                <span className="mt-2 block text-xs text-amber-100/80">
+                  {fieldErrors.email}
+                </span>
+              ) : null}
             </div>
 
             <div className="group">
-              <label className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white/70">
                 Telefone
-              </label>
+              </span>
 
               <div className="relative">
                 <Input
@@ -159,12 +211,17 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <Phone className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+              {fieldErrors.phone ? (
+                <span className="mt-2 block text-xs text-amber-100/80">
+                  {fieldErrors.phone}
+                </span>
+              ) : null}
             </div>
 
             <div className="group">
-              <label className="mb-2 block text-xs font-medium text-white/70">
+              <span className="mb-2 block text-xs font-medium text-white/70">
                 CNPJ
-              </label>
+              </span>
 
               <div className="relative">
                 <Input
@@ -179,6 +236,11 @@ function LeadForm({ onSubmit }: Readonly<LeadFormProps>) {
 
                 <IdCard className="pointer-events-none absolute right-1 top-1/2 size-4 -translate-y-1/2 text-white/30" />
               </div>
+              {fieldErrors.cnpj ? (
+                <span className="mt-2 block text-xs text-amber-100/80">
+                  {fieldErrors.cnpj}
+                </span>
+              ) : null}
             </div>
 
             <div className="pt-3">
